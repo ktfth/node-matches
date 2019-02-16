@@ -54,6 +54,8 @@ const matchesFn = (o = {}, v = null) => {
             out.push(o['_']);
         }
     }
+    delete global['matcherPattern'];
+    delete global['matcherPatternValue'];
     return out;
 };
 assert.deepEqual(matchesFn({ 'foobarbaz': 1, 'foobarbuzz': 2, '_': 'Pattern not founded' }, 'foo'), [1, 2]);
@@ -63,5 +65,8 @@ assert.deepEqual(matchesFn({ 'bar': 1, 'buzz': 2 }, 'foo'), []);
 assert.deepEqual(matchesFn({ 'bar': 1, 'baz': 2, 'fizz': 3, '_': 10 }, new Symbol('fizz', v => {
     return !includesFn(v, global['matcherPattern']);
 })), [1, 2]);
+assert.deepEqual(matchesFn({ 'foobar': 1, 'foobaz': (x, y) => x * y, 'fizz': 3, '_': 'Common Pattern' }, new Symbol('foo', v => {
+    return includesFn(v, global['matcherPattern']) && typeof(global['matcherPatternValue']) === 'function';
+})).length, 1);
 
 exports.matches = matchesFn;
