@@ -4,7 +4,7 @@
   "description": "Pattern matching library",
   "main": "index.js",
   "scripts": {
-    "test": "node index.js"
+    "test": "mocha index.test.js"
   },
   "repository": {
     "type": "git",
