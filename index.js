@@ -48,7 +48,7 @@ const matchesFn = (o = {}, v = null) => {
             out.push(o[k]);
         } else if (!isArray(v) && !isSymbol(v) && includesFn(v, k) && (k !== '_')) {
             out.push(o[k]);
-        } else if (isArray(v) && !isSymbol(v) && (v.filter(p => includesFn(p, k)).length == v.length) && (k !== '_')) {
+        } else if (isArray(v) && !isSymbol(v) && (v.filter(p => includesFn(p, k)).length > 0) && (k !== '_')) {
             out.push(o[k]);
         } else if (!out.length && (k === '_')) {
             out.push(o['_']);
@@ -59,7 +59,7 @@ const matchesFn = (o = {}, v = null) => {
     return out;
 };
 assert.deepEqual(matchesFn({ 'foobarbaz': 1, 'foobarbuzz': 2, '_': 'Pattern not founded' }, 'foo'), [1, 2]);
-assert.deepEqual(matchesFn({ 'foobarbaz': 1, 'foobizbuzz': 2, '_': 'Pattern not founded' }, ['foo', 'bar']), [1]);
+assert.deepEqual(matchesFn({ 'foobarbaz': 1, 'foobizbuzz': 2, '_': 'Pattern not founded' }, ['foo', 'bar']), [1, 2]);
 assert.deepEqual(matchesFn({ 'bar': 1, 'buzz': 2, '_': 'Pattern not founded' }, 'foo'), ['Pattern not founded']);
 assert.deepEqual(matchesFn({ 'bar': 1, 'buzz': 2 }, 'foo'), []);
 assert.deepEqual(matchesFn({ 'bar': 1, 'baz': 2, 'fizz': 3, '_': 10 }, new Symbol('fizz', v => {
