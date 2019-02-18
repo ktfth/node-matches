@@ -1,4 +1,4 @@
-# Matcher
+# xMatcher
 
 ## Description
 
@@ -7,7 +7,7 @@ Library of pattern matching based on pure types and symbols
 ## Usage
 
 ```
-[sudo] npm i -S matcher
+[sudo] npm i -S xmatcher
 ```
 
 ### Example

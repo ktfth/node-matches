@@ -1,5 +1,5 @@
 {
-  "name": "matcher",
+  "name": "xmatcher",
   "version": "1.0.0",
   "description": "Pattern matching library",
   "main": "index.js",
