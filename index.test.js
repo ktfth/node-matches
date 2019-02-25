@@ -47,3 +47,12 @@ describe('Matcher multiple patterns', () => {
         assert.deepEqual(matcher.matches({ 'foo': 1, 'bar': 2, 'baz': 3, 'buzz': 4, '_': 'Common pattern' }, ['bar', 'baz']), [2, 3]);
     });
 });
+
+describe('Matcher generator pattern', () => {
+    it('retrieve value based on a specific object', () => {
+        function* add(x, y) { return x + y; }
+        let a = add(10, 15);
+        a.someValue = 100;
+        assert.deepEqual(matcher.matches(a, new matcher.Symbol('someValue', v => global['matcher'].next().value + global['matcherPatternValue'] === 125)), [ 100 ]);
+    });
+});

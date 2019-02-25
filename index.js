@@ -41,6 +41,7 @@ exports.Symbol = Symbol;
 
 const matchesFn = (o = {}, v = null) => {
     let out = [];
+    global['matcher'] = o;
     for (let k in o) {
         global['matcherPattern'] = k;
         global['matcherPatternValue'] = o[k];
@@ -54,6 +55,7 @@ const matchesFn = (o = {}, v = null) => {
             out.push(o['_']);
         }
     }
+    delete global['matcher'];
     delete global['matcherPattern'];
     delete global['matcherPatternValue'];
     return out;
